@@ -38,3 +38,9 @@ function set_default_values( $entry, $post ) {
 //if you're using the registration add on make sure you're triggering author stuff off this instead of the wp user_registered
 
 add_action( 'gform_user_registered', 'YOUR_FUNCTION', 10, 1 );
+
+
+//conditional for templates etc.
+// [gravityforms action="conditional" merge_tag="{My Field:1}" condition="isnot" value=""]
+// My Field Label: {My Field:1}
+// [/gravityforms]
