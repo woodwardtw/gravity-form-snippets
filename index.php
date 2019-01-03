@@ -12,8 +12,8 @@ FORM SUBMISSION TO POST RELATED STUFF
 */
 
 //takes submitter to the post create on submissions that create posts
-add_action('gform_after_submission', 'redirect_on_post', 10, 2);
-function redirect_on_post($entry, $form) {
+add_action('gform_after_submission', 'alt_gform_redirect_on_post', 10, 2);
+function alt_gform_redirect_on_post($entry, $form) {
     $post_id = $entry['post_id'];
     $url = get_site_url() . "/?p=" . $post_id;
     wp_redirect($url);
