@@ -101,3 +101,36 @@ function many_site_registration_save( $user_id, $feed, $entry ) {
 
 add_action( 'gform_user_registered', 'YOUR_FUNCTION', 10, 1 );
 
+
+//site creation w no user creation
+
+add_action( 'gform_after_submission_5', 'gform_site_cloner', 10, 2 );//specific to the gravity form id
+
+function gform_site_cloner($entry, $form){
+
+    $_POST =  [
+        'action'         => 'process',
+        'clone_mode'     => 'core',
+        'source_id'      => rgar( $entry, '3' ), //specific to the form entry fields and should resolve to the ID site to copy
+        'target_name'    => rgar( $entry, '2' ), //specific to the form entry fields - need to parallel site url restrictions
+        'target_title'   => rgar( $entry, '2' ), //specific to the form entry fields
+        'disable_addons' => true,
+        'clone_nonce'    => wp_create_nonce('ns_cloner')
+    ];
+  
+  // Setup clone process and run it.
+  $ns_site_cloner = new ns_cloner();
+  $ns_site_cloner->process();
+
+  $site_id = $ns_site_cloner->target_id;
+  $site_info = get_blog_details( $site_id );
+  if ( $site_info ) {
+    // Clone successful!
+  }
+}
+
+
+
+//for initial user registration AND site creation documentation at https://docs.gravityforms.com/gform_site_created/
+add_action( 'gform_site_created', 'your_function_name', 10, 5 );
+
