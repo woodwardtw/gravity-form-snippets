@@ -1,7 +1,7 @@
 <?php 
 
 
-//gives you a clean URL to files uploaded via Gravity Forms so that building links or embedding them via the URL works
+//gives you a clean URL to files uploaded via Gravity Forms so that building links or embedding them via the URL works - w/o this you have a pretty secure media upload option
 add_filter( 'gform_secure_file_download_location', '__return_false' );
 
 
@@ -55,7 +55,7 @@ add_action( 'gform_after_submission_5', 'special_timeline_update', 10, 2 );//set
 
 //set featured image by form entry choice
 function altlab_timeline_featured_image($entry, $form){
-    $timeline_type = rgar($entry, '3');//entry field
+    $timeline_type = rgar($entry, '3');//entry field ID is 3
     if ($timeline_type  == 'First computer I owned' ){//response
         $img_id = 6895;//id of image in wp media library
     }
@@ -82,7 +82,7 @@ add_action( 'gform_after_submission_5', 'altlab_timeline_featured_image', 10, 2 
 
 /*
 ***
-FORM REGISTRATION
+FORM REGISTRATION of USERS AND SITES
 ***
 */
 
