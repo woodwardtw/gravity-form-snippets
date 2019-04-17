@@ -1,0 +1,46 @@
+
+/*radio buttons made horizontal - note form ID restrictor*/
+#gform_4 ul.gfield_radio li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #979797;
+    margin: 10px 0;
+    text-align: center;
+    position: relative;
+    border-radius: 50%;    
+}
+
+#gform_4 ul.gfield_radio li label{    
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 30px;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+#gform_4 .gform_wrapper ul.gfield_checkbox li label, .gform_wrapper ul.gfield_radio li label {
+   vertical-align: middle;
+   cursor: pointer;
+}
+
+#gform_4 ul.gfield_radio li label:active {
+  background-color: red
+}
+
+#gform_4 ul.gfield_radio input[type="radio"]:checked + label {
+  background-color:aqua;
+  display:block; 
+  border: 2px solid;
+  margin-left:-2px;
+  margin-top: -2px;
+}

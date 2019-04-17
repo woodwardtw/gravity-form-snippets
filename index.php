@@ -134,3 +134,45 @@ function gform_site_cloner($entry, $form){
 //for initial user registration AND site creation documentation at https://docs.gravityforms.com/gform_site_created/
 add_action( 'gform_site_created', 'your_function_name', 10, 5 );
 
+
+
+$search_criteria = array(
+    'status'        => 'active',
+    // 'field_filters' => array(
+    //     'mode' => 'any',       
+    //     array(
+    //         'key'   => '6',
+    //         'value' => $id
+    //     )
+    // )
+);
+
+  $sorting         = array();
+  $paging          = array( 'offset' => 0, 'page_size' => 100 );
+  $total_count     = 0;
+  $form_id = 4;
+  
+  $entries = GFAPI::get_entries($form_id, $search_criteria, $sorting, $paging, $total_count );
+  //print("<pre>".print_r($entries,true)."</pre>");
+  $html = '';
+  $total_scores = [];
+  $total_guesses = [];
+    foreach ($entries as $entry) {
+      if (intval($entry['gsurvey_score'])>0){
+        $pre = 'pos-';
+      }
+      if (intval($entry['gsurvey_score'])<0){
+        $pre = 'neg';
+      } 
+      if (intval($entry['gsurvey_score']) === 0) {
+        $pre = 'zero-';
+      }
+      array_push($total_scores,$pre . $entry['gsurvey_score']);
+      $guess = array_push($total_guesses, $entry[3]);
+    }    
+      $gform_scores = array(          
+           'scores' => $total_scores,
+       );
+     wp_localize_script('main-course', 'gformScores', $gform_scores); //sends data to script as variable     
+}
+
